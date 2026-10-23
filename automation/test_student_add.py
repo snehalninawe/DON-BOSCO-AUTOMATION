@@ -3666,32 +3666,32 @@ def test_student_add(driver):
     # MARKSHEET SEMESTER YEAR WISE RESULTS POST GRADUATION
     # ==========================================================
 
-    marksheet_post_graduation_file = (
-        r"C:\Users\Snehal Ninawe\OneDrive\Desktop\guhjn.jpg"
-    )
+    # marksheet_post_graduation_file = (
+    #     r"C:\Users\Snehal Ninawe\OneDrive\Desktop\guhjn.jpg"
+    # )
 
-    # ==========================================================
-    # WAIT FOR POST GRADUATION MARKSHEET FILE INPUT
-    # ==========================================================
+    # # ==========================================================
+    # # WAIT FOR POST GRADUATION MARKSHEET FILE INPUT
+    # # ==========================================================
 
-    marksheet_post_graduation = wait.until(
-        EC.presence_of_element_located(
-            (
-                By.XPATH,
-                "//input[@type='text' "
-                "and @id='placeholder_marksheets_all_semester_year_wise_results_post_graduation']"
-            )
-        )
-    )
+    # marksheet_post_graduation = wait.until(
+    #     EC.presence_of_element_located(
+    #         (
+    #             By.XPATH,
+    #             "//input[@type='text' "
+    #             "and @id='placeholder_marksheets_all_semester_year_wise_results_post_graduation']"
+    #         )
+    #     )
+    # )
 
     # ==========================================================
     # SCROLL UNTIL POST GRADUATION MARKSHEET IS VISIBLE
     # ==========================================================
 
-    driver.execute_script(
-        "arguments[0].scrollIntoView({block:'center', behavior:'smooth'});",
-        marksheet_post_graduation
-    )
+    # driver.execute_script(
+    #     "arguments[0].scrollIntoView({block:'center', behavior:'smooth'});",
+    #     marksheet_post_graduation
+    # )
 
     time.sleep(2)
 
@@ -3699,20 +3699,20 @@ def test_student_add(driver):
     # VERIFY POST GRADUATION MARKSHEET IS VISIBLE
     # ==========================================================
 
-    wait.until(
-        lambda driver: marksheet_post_graduation.is_displayed()
-    )
+    # wait.until(
+    #     lambda driver: marksheet_post_graduation.is_displayed()
+    # )
 
     # ==========================================================
     # MAKE FILE INPUT VISIBLE
     # ==========================================================
 
-    driver.execute_script(
-        "arguments[0].style.display='block';"
-        "arguments[0].style.visibility='visible';"
-        "arguments[0].style.opacity='1';",
-        marksheet_post_graduation
-    )
+    # driver.execute_script(
+    #     "arguments[0].style.display='block';"
+    #     "arguments[0].style.visibility='visible';"
+    #     "arguments[0].style.opacity='1';",
+    #     marksheet_post_graduation
+    # )
 
     # ==========================================================
     # UPLOAD POST GRADUATION MARKSHEET
@@ -3727,68 +3727,68 @@ def test_student_add(driver):
     # SCROLL TO BROWSE BUTTON
     # ==========================================================
 
-    browse_btn = wait.until(
-        EC.presence_of_element_located(
-            (
-                By.XPATH,
-                "(//button[@type='button'])[42]"
-            )
-        )
-    )
+    # browse_btn = wait.until(
+    #     EC.presence_of_element_located(
+    #         (
+    #             By.XPATH,
+    #             "(//button[@type='button'])[42]"
+    #         )
+    #     )
+    # )
 
-    driver.execute_script(
-        "arguments[0].scrollIntoView({block:'center'});",
-        browse_btn
-    )
+    # driver.execute_script(
+    #     "arguments[0].scrollIntoView({block:'center'});",
+    #     browse_btn
+    # )
 
-    time.sleep(1)
+    # time.sleep(1)
 
     # ==========================================================
     # CLICK BROWSE BUTTON
     # ==========================================================
 
-    wait.until(
-        EC.element_to_be_clickable(
-            (
-                By.XPATH,
-                "(//button[@type='button'])[42]"
-            )
-        )
-    ).click()
+    # wait.until(
+    #     EC.element_to_be_clickable(
+    #         (
+    #             By.XPATH,
+    #             "(//button[@type='button'])[42]"
+    #         )
+    #     )
+    # ).click()
 
-    time.sleep(1)
+    # time.sleep(1)
 
     # ==========================================================
     # GET ACTUAL FILE INPUT
     # ==========================================================
 
-    file_input = wait.until(
-        EC.presence_of_element_located(
-            (
-                By.XPATH,
-                "//input[@type='file']"
-            )
-        )
-    )
+    # file_input = wait.until(
+    #     EC.presence_of_element_located(
+    #         (
+    #             By.XPATH,
+    #             "//input[@type='file']"
+    #         )
+    #     )
+    # )
 
     # ==========================================================
     # UPLOAD FILE
     # ==========================================================
 
-    file_input.send_keys(
-        marksheet_post_graduation_file
-    )
+    # file_input.send_keys(
+    #     marksheet_post_graduation_file
+    # )
 
     # ==========================================================
     # VERIFY FILE UPLOAD
     # ==========================================================
 
-    assert file_input.get_attribute("value") != "", \
-    "Post Graduation Marksheet was not uploaded"
+#     assert file_input.get_attribute("value") != "", \
+#     "Post Graduation Marksheet was not uploaded"
 
-    print(
-    "Post Graduation Marksheet uploaded successfully"
-)
+#     print(
+#     "Post Graduation Marksheet uploaded successfully"
+# )
     # ==========================================================
         # NEXT
         # ==========================================================

@@ -1837,87 +1837,68 @@ def test_program_outcome(driver):
 
     assert selected_branch.text.strip().lower() == branch_value.strip().lower(), f"Expected branch '{branch_value}', but selected '{selected_branch.text.strip()}'."
     
-#         # ==========================================================
-#     # DEPARTMENT DROPDOWN
-#     # ==========================================================
 
-#     department_dropdown = wait.until(
-#         EC.element_to_be_clickable(
-#             (
-#                 By.XPATH,
-#                 "(//div[contains(@class,'ms-options-wrap')])[1]"
-#             )
-#         )
-#     )
-
-#     department_dropdown.click()
-    
-#     time.sleep(20)
-    
-
-#     department_option = wait.until(
-#     EC.element_to_be_clickable(
-#         (
-#             By.XPATH,
-#             f"//div[contains(@class,'ms-options-wrap')][1]"
-#             f"//li[.//input[@type='checkbox' and @title='{department_value}']]"
-#         )
-#     )
-# )
-
-#     driver.execute_script(
-#         "arguments[0].scrollIntoView({block:'center'});",
-#         department_option
-#     )
-
-#     department_checkbox = department_option.find_element(
-#         By.XPATH,
-#         ".//input[@type='checkbox']"
-#     )
-
-#     driver.execute_script(
-#         "arguments[0].click();",
-#         department_checkbox
-#     )
-
+   
     # ==========================================================
-    # DEPARTMENT DROPDOWN
+    # DEPARTMENT DROPDOWN - DEBUG
     # ==========================================================
 
     department_dropdown = wait.until(
         EC.element_to_be_clickable(
-            (
-                By.XPATH,
-                "(//div[contains(@class,'ms-options-wrap')])[1]"
-            )
+            (By.XPATH, "(//div[contains(@class,'ms-options-wrap')])[1]")
         )
     )
-
-    print("BEFORE DROPDOWN CLICK")
 
     department_dropdown.click()
 
-    print("DROPDOWN CLICKED - WAITING FOR 10 SECONDS")
+    # Wait until the dropdown is open
+    wait.until(
+        lambda d: "open" in (
+            department_dropdown.get_attribute("class") or ""
+        )
+        or department_dropdown.find_elements(
+            By.XPATH, ".//input[@type='checkbox']"
+        )
+    )
 
-    time.sleep(10)
+    time.sleep(2)
 
-    print("10 SECONDS COMPLETED - SELECTING OPTION")
+    # Print available department options
+    checkboxes = department_dropdown.find_elements(
+        By.XPATH, ".//input[@type='checkbox']"
+    )
 
-    # Wait for department option
-    department_option = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable(
+    print("\nDepartments available in dropdown:")
+
+    for checkbox in checkboxes:
+        print(
+            "Title:", checkbox.get_attribute("title"),
+            "| Value:", checkbox.get_attribute("value")
+        )
+
+    print("Expected department:", department_value)
+
+    # Find the expected department
+    department_option = wait.until(
+        EC.presence_of_element_located(
             (
                 By.XPATH,
-                f"(//div[contains(@class,'ms-options-wrap')])[1]"
-                f"//li[.//input[@type='checkbox' and @title='{department_value}']]"
+                "(//div[contains(@class,'ms-options-wrap')])[1]"
+                f"//input[@type='checkbox' and @title='{department_value}']"
             )
         )
     )
 
-    # Click department option
-    department_option.click()
+    driver.execute_script(
+        "arguments[0].scrollIntoView({block:'center'});",
+        department_option
+    )
 
-    print("DEPARTMENT SELECTED")
+    driver.execute_script(
+        "arguments[0].click();",
+        department_option
+    )
+
 
 
     # ==========================================================
