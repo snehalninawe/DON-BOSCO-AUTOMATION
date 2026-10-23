@@ -7,6 +7,10 @@ pipeline {
         disableConcurrentBuilds()
     }
 
+    environment {
+        PYTHON = 'C:\\Users\\Snehal Ninawe\\OneDrive\\Desktop\\Don Bosco\\.myenv\\Scripts\\python.exe'
+    }
+
     stages {
         stage('Checkout Code') {
             steps {
@@ -16,20 +20,19 @@ pipeline {
 
         stage('Check Python') {
             steps {
-                bat 'python --version'
-                bat 'python -m pip --version'
+                bat '"%PYTHON%" --version'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'python -m pip install selenium pytest openpyxl'
+                bat '"%PYTHON%" -m pip install selenium pytest openpyxl'
             }
         }
 
         stage('Run Automation Tests') {
             steps {
-                bat 'python -m pytest automation -v --junitxml=test-results.xml'
+                bat '"%PYTHON%" -m pytest automation -v --junitxml=test-results.xml'
             }
         }
     }
