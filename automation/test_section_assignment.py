@@ -13,7 +13,7 @@ from openpyxl import load_workbook
 file_path = Path(__file__).resolve().parent / "test_data.xlsx"
 workbook = load_workbook(file_path)
 
-sheet = workbook["Sheet1"]
+sheet = workbook["Section"]
 
 
 # ==========================================================
