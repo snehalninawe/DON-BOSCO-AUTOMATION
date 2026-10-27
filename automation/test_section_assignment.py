@@ -2,6 +2,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import time
+from pathlib import Path
 from openpyxl import load_workbook
 
 
@@ -9,7 +10,8 @@ from openpyxl import load_workbook
 # READ EXTERNAL DATA FROM EXCEL
 # ==========================================================
 
-workbook = load_workbook("test_data.xlsx")
+file_path = Path(__file__).resolve().parent / "test_data.xlsx"
+workbook = load_workbook(file_path)
 
 sheet = workbook["Sheet1"]
 

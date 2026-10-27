@@ -3,8 +3,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 import time
-from excel_reader import get_data
 
+from excel_reader import get_all_data
+from excel_reader import get_data
 
 
 # ==========================================================
@@ -12,9 +13,7 @@ from excel_reader import get_data
 # ==========================================================
 
 
-
-
-
+# TEST DATA
 data = get_data("Roll no")
 
 branch_value = data["Branch"]
@@ -22,11 +21,11 @@ department_value = data["Department"]
 program_value = data["Program"]
 semester_value = data["Semester"]
 semester_label_value = data["Semester Label"]
-
 sort_by_value = data["Sort By"]
 section_value = data["Section"]
 prefix_value = data["Prefix"]
 start_from_value = str(data["Start From"])
+
 
 
 def test_rollno_assignment(driver):
@@ -301,7 +300,7 @@ def test_rollno_assignment(driver):
         EC.element_to_be_clickable(
             (
                 By.XPATH,
-                "//li[normalize-space()='First Name']"
+                f"//li[normalize-space()='{sort_by_value}']"
             )
         )
     )
@@ -367,7 +366,7 @@ def test_rollno_assignment(driver):
     )
 
 
-    prefix_field.send_keys("CSE-")
+    prefix_field.send_keys(prefix_value)
     
     #-------Roll Number Starts from -------
     roll_from_field = wait.until(
@@ -380,7 +379,7 @@ def test_rollno_assignment(driver):
     )
 
     roll_from_field.clear()
-    roll_from_field.send_keys("1")
+    roll_from_field.send_keys(start_from_value)
     
     
     #--------GENERATE and PREVIEW BUTTONS--------
